@@ -10,11 +10,11 @@
 <body>
     
 <img src="gsb.jpg">
-        <form action="connection.html" method="get">
+        <form action="connection.php" method="post">
     <button class="button button2">Connection</button>
 </form>
-    <form action="inscription.html" method="get">
-    <button class="button button2" href="inscription.php">Inscription</button>
+    <form action="inscription.php" method="post">
+    <button class="button button2">Inscription</button>
 </form>
 </body>
 </html>

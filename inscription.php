@@ -10,7 +10,7 @@
 <body>
     <h3>Inscription</h3>
 <div>
-  <form action="/action_page.php">
+  <form action="gestionInscription.php" method="post">
     <label for="prenom">Prénom*</label>
     <input type="text" id="fname" name="firstname" placeholder="Votre prénom..">
 
