@@ -60,7 +60,15 @@ img{
   input[type=submit]:hover {
     background-color: #45a049;
   }
-  
+  h2{
+    background-color: white; 
+    color: black; 
+    border: 2px solid #008CBA;
+    position: relative;
+    top: 200px;
+    left: 570px;
+    width: 300px;
+  }
   div {
     border-radius: 5px;
     background-color: #f2f2f2;
