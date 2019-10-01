@@ -12,16 +12,16 @@
 <div>
   <form action="gestionInscription.php" method="post">
     <label for="prenom">Prénom*</label>
-    <input type="text" minlength="2" maxlength ="15" required="required" id="nom" name="nom" placeholder="Votre prénom..">
+    <input type="text" minlength="2" maxlength ="30" required="required" id="nom" name="nom" placeholder="Votre prénom..">
 
     <label for="nom">Nom*</label>
-    <input type="text" minlength="2" maxlength ="15" required="required" id="prenom" name="prenom" placeholder="votre nom..">
+    <input type="text" minlength="2" maxlength ="30" required="required" id="prenom" name="prenom" placeholder="votre nom..">
 
     <label for="age">Age*</label>
-    <input type="text" minlength="2" maxlength ="15" required="required" id="age" name="age" placeholder="Votre age..">
+    <input type="text" minlength="2" maxlength ="5" required="required" id="age" name="age" placeholder="Votre age..">
 
     <label for="email">Email*</label>
-    <input type="text" minlength="2" maxlength ="15" required="required"id="email" name="email" placeholder="Votre email..">
+    <input type="text" minlength="2" maxlength ="50" required="required"id="email" name="email" placeholder="Votre email..">
 
     <label for="mdp1">Mot de passe*</label>
     <input type="text" id="mdp1" name="mdp1" placeholder="Votre mot de passe..">
@@ -35,7 +35,6 @@
         <option value="Docteur">Docteur</option>
         <option value="Autre">Autre</option>
       </select>
-      <button class="button button2" onclick="Get()">TEST</button>
     <input type="submit" value="Submit">
   </form>
 </div>

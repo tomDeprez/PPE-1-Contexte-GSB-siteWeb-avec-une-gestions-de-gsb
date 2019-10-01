@@ -1,15 +1,5 @@
 <?php
-try{
-    $dbh = new PDO('mysql:host=localhost;dbname=GSB;', "root", "root");
-    //$conn = new mysqli($serveur, $login, $pass, $login, $table);
-    //$base->exec("SET CHARACTER SET utf8");
-    //$retour = $base->query('requete');
-    print "connecté !  ";
-    } catch (PDOException $e) {
-       print "Erreur !: " . $e->getMessage() . "<br/>";
-       die();
- }
-
+require("ConnexionBDD.php");
 $nom = $_POST['nom'];
 $prenom = $_POST['prenom'];
 $age = $_POST['age'];
@@ -33,6 +23,16 @@ $mdp1 = htmlspecialchars($mdp1);
 $mdp2 = htmlspecialchars($mdp2);
 $secteur = htmlspecialchars($secteur);
 
+$mdp1 = md5($mdp1 . $email);
+$mdp2 = md5($mdp2 . $email);
+
+$stmt = $dbh->prepare("SELECT * FROM utilisateur WHERE email = ?");
+if ($stmt->execute(array($email))) {
+    if ($stmt->fetch())
+    {
+        $erreur .= "L'email existe déjà ! \n";
+    }
+}
 if($nom == ""){
     $erreur .= "Le nom est obligatoire ! \n";
 }
@@ -56,7 +56,7 @@ if (!(filter_var($email, FILTER_VALIDATE_EMAIL))) {
 }
 
 if ($erreur == "") {
-   
+
     $stmt = $dbh->prepare("INSERT INTO utilisateur (prenom, nom, age, email, mdp, secteur) VALUES (:prenom, :nom, :age, :email, :mdp, :secteur)");
     $stmt->bindParam(':prenom', $prenomr);
     $stmt->bindParam(':nom', $nomr);
@@ -72,12 +72,19 @@ if ($erreur == "") {
     $secteurr = $secteur;
     var_dump($stmt);
     $stmt->execute();
-  // header('Location: validation.php');
+    $monfichier = fopen('echange.txt', 'r+');
+    fputs($monfichier, "");
+    fclose($monfichier);
+    header('Location: validation.php');
 }
 else {
+    echo "\n".$erreur;
     $monfichier = fopen('echange.txt', 'r+');
-    fputs($monfichier, $conter);
+    fputs($monfichier, "");
+    fputs($monfichier, $erreur);
     fclose($monfichier);
+    print "      OK ERREUR";
+    header('Location: inscription.php');
 }
 
 //  $utilisateur = trim($utilisateur);
