@@ -31,9 +31,9 @@
 
     <label for="secteur">Secteur*</label>
     <select id="secteur" name="secteur">
-        <option value="australia">Medecin</option>
-        <option value="canada">Docteur</option>
-        <option value="usa">Autre</option>
+        <option value="Medecin">Medecin</option>
+        <option value="Docteur">Docteur</option>
+        <option value="Autre">Autre</option>
       </select>
       <button class="button button2" onclick="Get()">TEST</button>
     <input type="submit" value="Submit">

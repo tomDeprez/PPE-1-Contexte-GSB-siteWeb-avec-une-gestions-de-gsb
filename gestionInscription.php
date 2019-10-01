@@ -12,6 +12,7 @@ try{
 
 $nom = $_POST['nom'];
 $prenom = $_POST['prenom'];
+$age = $_POST['age'];
 $email = $_POST['email'];
 $mdp1 = $_POST['mdp1'];
 $mdp2 = $_POST['mdp2'];
@@ -55,12 +56,27 @@ if (!(filter_var($email, FILTER_VALIDATE_EMAIL))) {
 }
 
 if ($erreur == "") {
-    header('Location: validationDuMail.php');
+   
+    $stmt = $dbh->prepare("INSERT INTO utilisateur (prenom, nom, age, email, mdp, secteur) VALUES (:prenom, :nom, :age, :email, :mdp, :secteur)");
+    $stmt->bindParam(':prenom', $prenomr);
+    $stmt->bindParam(':nom', $nomr);
+    $stmt->bindParam(':age', $ager);
+    $stmt->bindParam(':email', $emailr);
+    $stmt->bindParam(':mdp', $mdp1r);
+    $stmt->bindParam(':secteur', $secteurr);
+    $prenomr = $prenom;
+    $nomr = $nom;
+    $ager = $age;
+    $emailr = $email;
+    $mdp1r = $mdp1;
+    $secteurr = $secteur;
+    var_dump($stmt);
+    $stmt->execute();
+  // header('Location: validation.php');
 }
 else {
     $monfichier = fopen('echange.txt', 'r+');
-    header('Location: inscription.php');
-    fwrite($monfichier, $erreur);
+    fputs($monfichier, $conter);
     fclose($monfichier);
 }
 

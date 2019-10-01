@@ -9,7 +9,7 @@
 </head>
 <body>
 <img src="gsb.jpg">
-<h2>Un email vous à etait envoyé, cliquer dessue afin de pouvoir vous connecter</h2>
+<h2>cliquer sur le lien si dessou afin de valider votre inscription :</h2>
         <form action="connection.php" method="post">
     <button class="button button2">Connection</button>
 </form>
