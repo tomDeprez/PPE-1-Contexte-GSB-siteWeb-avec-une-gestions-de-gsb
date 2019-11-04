@@ -1,12 +1,12 @@
 <?php
 require("ConnexionBDD.php");
-$nom = $_POST['nom'];
-$prenom = $_POST['prenom'];
-$age = $_POST['age'];
-$email = $_POST['email'];
-$mdp1 = $_POST['mdp1'];
-$mdp2 = $_POST['mdp2'];
-$secteur = $_POST['secteur'];
+$nom = $_GET['nom'];
+$prenom = $_GET['prenom'];
+$age = $_GET['age'];
+$email = $_GET['email'];
+$mdp1 = $_GET['mdp1'];
+$mdp2 = $_GET['mdp2'];
+$secteur = $_GET['secteur'];
 $erreur = "";
 
 $nom = trim($nom);
@@ -78,13 +78,7 @@ if ($erreur == "") {
     header('Location: validation.php');
 }
 else {
-    echo "\n".$erreur;
-    $monfichier = fopen('echange.txt', 'r+');
-    fputs($monfichier, "");
-    fputs($monfichier, $erreur);
-    fclose($monfichier);
-    print "      OK ERREUR";
-    header('Location: inscription.php');
+    echo "ERREUR\n".$erreur;
 }
 
 //  $utilisateur = trim($utilisateur);

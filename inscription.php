@@ -5,17 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="source.css">
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
     <title>GSB - Inscriptions</title>
+    <?php
+  require("gestionInscription.php");
+  ?>
 </head>
 <body>
     <h3>Inscription</h3>
 <div>
-  <form action="gestionInscription.php" method="post">
-    <label for="prenom">Prénom*</label>
-    <input type="text" minlength="2" maxlength ="30" required="required" id="nom" name="nom" placeholder="Votre prénom..">
+<form method="POST" id="form">
+    <label for="nom">nom*</label>
+    <input type="text" minlength="2" maxlength ="30" required="required" id="nom" name="nom" placeholder="Votre nom..">
 
-    <label for="nom">Nom*</label>
-    <input type="text" minlength="2" maxlength ="30" required="required" id="prenom" name="prenom" placeholder="votre nom..">
+    <label for="prenom">Prénom*</label>
+    <input type="text" minlength="2" maxlength ="30" required="required" id="prenom" name="prenom" placeholder="votre Prénom..">
 
     <label for="age">Age*</label>
     <input type="text" minlength="2" maxlength ="5" required="required" id="age" name="age" placeholder="Votre age..">
@@ -35,10 +39,24 @@
         <option value="Docteur">Docteur</option>
         <option value="Autre">Autre</option>
       </select>
-    <input type="submit" value="Submit">
+      <input type="submit" id="myCheckbox" value="Submit">
+    <div id="products" name="products"></div>
   </form>
 </div>
 <script>
+    $("#myCheckbox").click(function(event) {
+      // alert("nom=" + $("#nom").val() + "&prenom=" + $("#prenom").val() + "&age=" + $("#age").val());
+    event.preventDefault();
+    $.ajax({
+      url: 'gestionInscription.php', // Le nom du fichier indiqué dans le formulaire
+      type: "GET", // La méthode indiquée dans le formulaire (get ou post)
+      // data: "nom=" + $("#nom").val() + "&prenom=" + $("#prenom").val() + "&age=" + $("#age").val() + "&email=" + $("#email").val() + "&mdp1=" + $("#mdp1").val() + "&mdp2=" + $("#mdp2").val()+ "&secteur=" + $("#secteur").val(),
+      dataType : 'html',
+      success: function(response) { // Je récupère la réponse du fichier PHP
+        $('#products').html(response);
+      }
+    });
+  });
   function Get() {
      //On lance la requête pour récupérer le fichier
  var fichierBrut = new XMLHttpRequest();

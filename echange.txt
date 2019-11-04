@@ -1,1 +1,2 @@
-L'email existe déjà ! 
+<center>Compte trouvé ! 
+ Bienvenue root !

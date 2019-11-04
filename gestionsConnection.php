@@ -1,8 +1,8 @@
 <?php
 require("ConnexionBDD.php");
 fclose(fopen('connectionEchange.txt', 'w'));
-$email = $_POST['email'];
-$mdp = $_POST['mdp'];
+$email = $_GET['email'];
+$mdp = $_GET['mdp'];
 
 $email = trim($email);
 $mdp = trim($mdp);
@@ -16,7 +16,8 @@ $stmt = $dbh->prepare("SELECT * FROM utilisateur WHERE mdp = ?");
 if ($stmt->execute(array($mdp))) {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($result['prenom'] != ""){
-        echo "<center><h1>Compte trouvé ! \n Bienvenue ".$result['prenom']." !</h1></center>";
+        echo "*<center><h1>Compte trouvé ! \n Bienvenue ".$result['prenom']." !</h1></center>";
+        require("redirectionSession.php");
     }
     else {
         echo "<div><center><h1>Compte introuvable nous sommes désolés !!</h1>";
