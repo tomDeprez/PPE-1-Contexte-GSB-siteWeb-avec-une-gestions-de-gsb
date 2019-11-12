@@ -30,18 +30,19 @@
 </body>
 <!-- <div class="frame">
    <div class="center"> -->
-<center>
+
   <div id="products" name="products">
   </div>
-</center>
+
 <!-- </div>
 </div> -->
 <script>
   $("#myCheckbox").click(function(event) {
+    var form = $("#form");
     event.preventDefault();
     $.ajax({
       url: 'Chargement.php', // Le nom du fichier indiqué dans le formulaire
-      type: "GET", // La méthode indiquée dans le formulaire (get ou post)
+      type: "POST", // La méthode indiquée dans le formulaire (get ou post)
       dataType: 'html',
       success: function(response) { // Je récupère la réponse du fichier PHP
         $('#products').html(response);
@@ -49,8 +50,8 @@
     });
     $.ajax({
       url: 'gestionsConnection.php', // Le nom du fichier indiqué dans le formulaire
-      type: "GET", // La méthode indiquée dans le formulaire (get ou post)
-      data: "email=" + $("#email").val() + "&mdp=" + $("#mdp").val(),
+      type: "POST", // La méthode indiquée dans le formulaire (get ou post)
+      data: form.serialize(),
       dataType: 'html',
       success: function(response) { // Je récupère la réponse du fichier PHP
         $('#products').html(response);
@@ -62,7 +63,7 @@
   function redirection(response) {
     var result = response.indexOf("*");
     if (result == 0) {
-      location.replace("http://192.168.43.18/sesionHome.php")
+      location.replace("sesionHome.php")
     }
   }
 </script>

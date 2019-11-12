@@ -1,16 +1,17 @@
 <?php
 require("ConnexionBDD.php");
-$nom = $_GET['nom'];
-$prenom = $_GET['prenom'];
-$age = $_GET['age'];
-$email = $_GET['email'];
-$mdp1 = $_GET['mdp1'];
-$mdp2 = $_GET['mdp2'];
-$secteur = $_GET['secteur'];
+$nom = $_POST['nom'];
+$prenom = $_POST['prenom'];
+$age = $_POST['age'];
+$email = $_POST['email'];
+$mdp1 = $_POST['mdp1'];
+$mdp2 = $_POST['mdp2'];
+$secteur = $_POST['secteur'];
 $erreur = "";
 
 $nom = trim($nom);
 $prenom = trim($prenom);
+$age = trim($age);
 $email = trim($email);
 $mdp1 = trim($mdp1);
 $mdp2 = trim($mdp2);
@@ -18,6 +19,7 @@ $secteur = trim($secteur);
 
 $nom = htmlspecialchars($nom);
 $prenom = htmlspecialchars($prenom);
+$age = htmlspecialchars($age);
 $email = htmlspecialchars($email);
 $mdp1 = htmlspecialchars($mdp1);
 $mdp2 = htmlspecialchars($mdp2);
@@ -32,6 +34,9 @@ if ($stmt->execute(array($email))) {
     {
         $erreur .= "L'email existe déjà ! \n";
     }
+}
+if(!is_numeric($age)){
+    $erreur .= "Votre âge n'est pas correct ! \n";
 }
 if($nom == ""){
     $erreur .= "Le nom est obligatoire ! \n";
@@ -72,13 +77,10 @@ if ($erreur == "") {
     $secteurr = $secteur;
     var_dump($stmt);
     $stmt->execute();
-    $monfichier = fopen('echange.txt', 'r+');
-    fputs($monfichier, "");
-    fclose($monfichier);
     header('Location: validation.php');
 }
 else {
-    echo "ERREUR\n".$erreur;
+    echo "<center>ERREUR</center>\n<center><p style = 'color:red'>".$erreur."</p></center>";
 }
 
 //  $utilisateur = trim($utilisateur);
