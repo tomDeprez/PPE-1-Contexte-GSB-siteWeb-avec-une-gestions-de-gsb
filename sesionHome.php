@@ -7,6 +7,7 @@
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito:200,300,400|Roboto:300,400,500'>
   <link rel="stylesheet" href="styleSession.css">
   <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+  <link rel="stylesheet" href="styleLoader.css">
 </head>
 
 <body>
@@ -14,11 +15,8 @@
   <div class="container">
     <div class="menu-column">
       <ul class="nav">
-        <li class="pulse"></li>
-        <li class="chat"></li>
-        <li class="calendar"></li>
-        <li class="clipboard"></li>
-        <li class="settings"></li>
+        <li class="pulse" id="pulse"></li>
+        <li class="clipboard" id="clipboard"></li>
       </ul>
       <div class="profile"><img src="https://placeimg.com/100/100/face" /></div>
     </div>
@@ -214,15 +212,42 @@
       event.preventDefault();
       var search = document.getElementById("Search").value;
       $.ajax({
+        url: 'Loader.php', // Le nom du fichier indiqué dans le formulaire
+        type: "POST", // La méthode indiquée dans le formulaire (get ou post)
+        data: "search=",
+        dataType: 'html',
+        success: function(response) { // Je récupère la réponse du fichier PHP
+          $('#activity-list').html("<h3>Recent Activity</h3>" + response);
+        }
+      });
+      $.ajax({
         url: 'Search.php', // Le nom du fichier indiqué dans le formulaire
         type: "POST", // La méthode indiquée dans le formulaire (get ou post)
-        dataType: "search=" + search,
+        data: "search=" + search,
+        dataType: 'html',
         success: function(response) { // Je récupère la réponse du fichier PHP
-          $('#activity-list').html(response);
-          alert(response);
+          if (response == "") {
+            $('#activity-list').html("<h3>Recent Activity</h3>" + "Aucun compte trouvé");
+          } else {
+            $('#activity-list').html("<h3>Recent Activity</h3>" + response);
+          }
         }
       });
     }
+    $("#pulse").click(function(event) {
+    alert("test");
+    event.preventDefault();
+    $.ajax({
+      url: 'Chargement.php', // Le nom du fichier indiqué dans le formulaire
+      type: "POST", // La méthode indiquée dans le formulaire (get ou post)
+      dataType: 'html',
+      success: function(response) { // Je récupère la réponse du fichier PHP
+        $('#products').html(response);
+      }
+    });
+  });
+
+    pulse
   </script>
 
 </body>

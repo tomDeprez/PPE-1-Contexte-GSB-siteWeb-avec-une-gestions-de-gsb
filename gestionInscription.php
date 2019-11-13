@@ -75,9 +75,8 @@ if ($erreur == "") {
     $emailr = $email;
     $mdp1r = $mdp1;
     $secteurr = $secteur;
-    var_dump($stmt);
     $stmt->execute();
-    header('Location: validation.php');
+    echo "validation";
 }
 else {
     echo "<center>ERREUR</center>\n<center><p style = 'color:red'>".$erreur."</p></center>";

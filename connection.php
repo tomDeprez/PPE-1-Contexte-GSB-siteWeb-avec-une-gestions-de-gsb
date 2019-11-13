@@ -31,8 +31,8 @@
 <!-- <div class="frame">
    <div class="center"> -->
 
-  <div id="products" name="products">
-  </div>
+<div id="products" name="products">
+</div>
 
 <!-- </div>
 </div> -->

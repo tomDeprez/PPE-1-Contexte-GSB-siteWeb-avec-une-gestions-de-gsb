@@ -11,7 +11,7 @@
   <title>GSB - Inscriptions</title>
 </head>
 
-<body>
+<body id="myDIV">
   <h3>Inscription</h3>
   <div>
     <form method="POST" id="form">
@@ -41,11 +41,12 @@
       </select>
 
       <input type="submit" id="myCheckbox" value="Submit">
-        <div id="products" name="products">
-        </div>
+      <div id="products" name="products">
+      </div>
     </form>
   </div>
   <script>
+
     $("#myCheckbox").click(function(event) {
       event.preventDefault();
       var form = $("#form");
@@ -64,6 +65,9 @@
         dataType: 'html',
         success: function(response) { // Je récupère la réponse du fichier PHP
           $('#products').html(response);
+          if (response.search("validation") == 0) {
+            document.location.href="validation.php"; 
+          }
         }
       });
     });

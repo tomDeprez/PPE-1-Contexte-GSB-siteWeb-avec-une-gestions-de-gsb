@@ -1,6 +1,7 @@
 <?php
 require("ConnexionBDD.php");
-fclose(fopen('connectionEchange.txt', 'w'));
+
+
 $email = $_POST['email'];
 $mdp = $_POST['mdp'];
 
