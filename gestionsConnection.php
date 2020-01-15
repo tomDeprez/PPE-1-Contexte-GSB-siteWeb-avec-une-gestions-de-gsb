@@ -13,21 +13,22 @@ $mdp = htmlspecialchars($mdp);
 
 $mdp = md5($mdp . $email);
 if ($email != "" && $mdp != ""){
-$stmt = $dbh->prepare("SELECT * FROM utilisateur WHERE mdp = :mdp and email = :email");
-$stmt->bindParam(':mdp', $mdp1r);
-$stmt->bindParam(':email', $emailr);
-$emailr = $email;
-$mdp1r = $mdp;
-if ($stmt->execute()) {
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($result['prenom'] != ""){
-        echo "*<center><h1>Compte trouvé ! \n Bienvenue ".$result['prenom']." !</h1></center>";
-        require("redirectionSession.php");
+
+    $stmt = $dbh->prepare("SELECT * FROM utilisateur WHERE mdp = :mdp and email = :email");
+    $stmt->bindParam(':mdp', $mdp1r);
+    $stmt->bindParam(':email', $emailr);
+    $emailr = $email;
+    $mdp1r = $mdp;
+    
+    if ($stmt->execute()) {
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result['prenom'] != ""){
+            echo "*<center><h1>Compte trouvé ! \n Bienvenue ".$result['prenom']." !</h1></center>";
+            require("redirectionSession.php");
+        }
+        else {
+            echo "<div><center><h1>Compte introuvable nous sommes désolés !!</h1>";
+            echo '<form action="inscription.php"><button class=\"button\">Créer un compte</button></center></div></form>';
+        }
     }
-    else {
-        echo "<div><center><h1>Compte introuvable nous sommes désolés !!</h1>";
-        echo '<form action="inscription.php"><button class=\"button\">Créer un compte</button></center></div></form>';
-    }
- }
 }
-?>

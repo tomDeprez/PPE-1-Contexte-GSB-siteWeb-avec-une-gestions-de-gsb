@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="source.css">
-  <link rel="stylesheet" href="styleChargement.css">
+  <link rel="stylesheet" href="css/source.css">
+  <link rel="stylesheet" href="css/styleChargement.css">
   <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
   <title>GSB - Inscriptions</title>
 </head>
@@ -28,10 +28,10 @@
       <input type="text" minlength="2" maxlength="50" required="required" id="email" name="email" placeholder="Votre email..">
 
       <label for="mdp1">Mot de passe*</label>
-      <input type="text" id="mdp1" name="mdp1" placeholder="Votre mot de passe..">
+      <input type="password" id="mdp1" name="mdp1" placeholder="Votre mot de passe..">
 
       <label for="mdp2">confirmation de votre mot de passe*</label>
-      <input type="text" id="mdp2" name="mdp2" placeholder="confirmer votre mot de passe..">
+      <input type="password" id="mdp2" name="mdp2" placeholder="confirmer votre mot de passe..">
 
       <label for="secteur">Secteur*</label>
       <select id="secteur" name="secteur">

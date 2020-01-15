@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <title>Dashboard</title>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito:200,300,400|Roboto:300,400,500'>
-  <link rel="stylesheet" href="styleSession.css">
+  <link rel="stylesheet" href="css/styleSession.css">
   <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-  <link rel="stylesheet" href="styleLoader.css">
+  <link rel="stylesheet" href="css/styleLoader.css">
 </head>
 
 <body>
@@ -206,7 +206,7 @@
   <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js'></script>
   <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyA5wVTk5SQ3alGnIqPchU9CmU7v__ypM6Q'></script>
-  <script src="script.js"></script>
+  <script src="js/script.js"></script>
   <script>
     function cleRelachee(event) {
       event.preventDefault();
@@ -235,19 +235,11 @@
       });
     }
     $("#pulse").click(function(event) {
-    alert("test");
-    event.preventDefault();
-    $.ajax({
-      url: 'Chargement.php', // Le nom du fichier indiqué dans le formulaire
-      type: "POST", // La méthode indiquée dans le formulaire (get ou post)
-      dataType: 'html',
-      success: function(response) { // Je récupère la réponse du fichier PHP
-        $('#products').html(response);
-      }
+      window.location.href = "sesionHome.php";
     });
-  });
-
-    pulse
+    $("#clipboard").click(function(event) {
+      window.location.href = "sessionAdd.php";
+    });
   </script>
 
 </body>
