@@ -10,13 +10,18 @@
 </head>
 
 <body>
-    <img src="img/gsb.jpg">
-    <form action="connection.php" method="post">
-        <button class="button button2">Connection</button>
-    </form>
-    <form action="inscription.php" method="post">
-        <button class="button button2">Inscription</button>
-    </form>
+    <div class="cont_1">
+        <img src="img/gsb.jpg">
+        <div class="cont_button">
+            <form action="connection.php" method="post">
+                <button class="button button2">Connexion</button>
+            </form>
+            <form action="inscription.php" method="post">
+                <button class="button button2">Inscription</button>
+            </form>
+        </div>
+       
+    </div>
 </body>
 
 </html>

@@ -12,10 +12,21 @@
     transition-duration: 0.4s;
     cursor: pointer;
   }
+  .cont_1{
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+  }
+  .cont_button {
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+  }
 img{
-    position: relative;
-    top: 200px;
-    left: 570px;
+    /* position: relative;
+    margin-top: 10%;
+    margin-bottom: 5%;
+    left: 40%; */
     background-color: white;
     width: 300px;
 }
@@ -33,10 +44,10 @@ img{
     color: white;
   }
   .button2 {
-    position: relative;
-    top: 200px;
-    left: 570px;
-    background-color: white;
+    /* position: relative;
+    margin-top:0; 
+    left: 40%;
+    background-color: white; */
     width: 300px;
   }
   input[type=text], select {

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Dashboard</title>
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito:200,300,400|Roboto:300,400,500'>
+  <link rel='stylesheet' href='css/cssRoboto.css'>
   <link rel="stylesheet" href="css/styleSession.css">
   <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
   <link rel="stylesheet" href="css/styleLoader.css">
