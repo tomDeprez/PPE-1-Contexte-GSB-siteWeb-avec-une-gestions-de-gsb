@@ -11,14 +11,14 @@
     <link rel="stylesheet" href="css/styleAdd.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito:200,300,400|Roboto:300,400,500'>
     <link rel="stylesheet" href="css/styleSession.css">
-    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" href="css/styleLoader.css">
 
 
 </head>
 
 <body>
-<div class="products" id="products"></div>
+    <div class="products" id="products"></div>
 
     <div class="container">
         <div class="menu-column">
@@ -62,71 +62,71 @@
             <h1> ajouter de nouveaux patients
             </h1>
             <section class="contact-wrap">
-                <form class="contact-form" id="form">
+                <form class="contact-form" id="Myform">
                     <div class="col-sm-6">
                         <div class="input-block">
                             <label for="">Nom</label>
-                            <input type="text" nam="Nom" id="Nom" class="form-control">
+                            <input type="text" name="Nom" id="Nom" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="input-block">
                             <label for="">Prénom</label>
-                            <input type="text" nam="Prenom" class="form-control">
+                            <input type="text" name="Prenom" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="input-block">
                             <label for="">Age</label>
-                            <input type="text" nam="Age" class="form-control">
+                            <input type="text" name="Age" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="input-block">
                             <label for="">Sexe</label>
-                            <input type="text" nam="Sexe" class="form-control">
+                            <input type="text" name="Sexe" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="input-block">
                             <label for="">Poids</label>
-                            <input type="text" nam="Poids" class="form-control">
+                            <input type="text" name="Poids" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="input-block">
                             <label for="">Taille</label>
-                            <input type="text" nam="Taille" class="form-control">
+                            <input type="text" name="Taille" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="input-block">
                             <label for="">Fat</label>
-                            <input type="text" nam="Fat" class="form-control">
+                            <input type="text" name="Fat" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="input-block">
                             <label for="">Temperature</label>
-                            <input type="text" nam="Temperature" class="form-control">
+                            <input type="text" name="Temperature" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="input-block">
                             <label for="">Calories</label>
-                            <input type="text" nam="Calories" class="form-control">
+                            <input type="text" name="Calories" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="input-block">
                             <label for="">Coeur</label>
-                            <input type="text" nam="Coeur" class="form-control">
+                            <input type="text" name="Coeur" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="input-block">
                             <label for="">Sommeil</label>
-                            <input type="text" nam="Sommeil" class="form-control">
+                            <input type="text" name="Sommeil" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-12">
@@ -219,25 +219,31 @@
 </script>
 <script>
     $("#myCheckbox").click(function(event) {
-        // var form = $(this.form);
-        var form = $("#form");
-
         event.preventDefault();
+        var myForm = document.getElementById('Myform');
+        var formData = new FormData(myForm);
         //alert(form.serialize());
         $.ajax({
             url: 'AddPatients.php', // Le nom du fichier indiqué dans le formulaire
             type: "POST", // La méthode indiquée dans le formulaire (get ou post)
-            data: form.serialize(),
-            dataType: 'html',
+            data: formData,
+            // dataType: 'html',
+            processData: false, // indique à jQuery de ne pas traiter les données
+            contentType: false,
+            // contentType: false,
             success: function(response) { // Je récupère la réponse du fichier PHP
                 $('#products').html(response);
-                 
-                setTimeout(function() {
-                    runEffect();
-                }, 50);
+                // setTimeout($('#products').html(""), 10000);
+                sleep(5000).then(() => {
+                    $('#products').html("");
+                });
             }
         });
     });
+
+    function sleep(time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
 
     $(function() {
         // run the currently selected effect
@@ -283,9 +289,6 @@
         $("#effect").hide();
     });
 </script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="js/FormulaireScript.js"></script>
 
 

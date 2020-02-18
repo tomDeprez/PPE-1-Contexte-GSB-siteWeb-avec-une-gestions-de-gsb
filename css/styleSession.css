@@ -711,7 +711,7 @@ select {
 }
 
 .toggler {
-  position:absolute;
+  position:fixed;
   left: 45%;
     z-index: 100;
   }
@@ -719,8 +719,32 @@ select {
   padding: .5em 1em; text-decoration: none; 
 }
 #effect { 
-  width: 240px; height: 170px; padding: 0.4em; position: relative; 
+  width: 240px; 
+  height: 170px; 
+  padding: 0.4em; 
+  position: relative; 
+  color: rgb(71, 173, 79);
 }
+#effectErreur { 
+  width: 240px; 
+  height: 170px; 
+  padding: 0.4em; 
+  position: relative; 
+  color: red;
+}
+
 #effect h3 { 
-  margin: 0; padding: 0.4em; text-align: center; 
+  margin: 0; 
+  padding: 0.4em; 
+  text-align: 
+  center; 
+  color: rgb(71, 173, 79);
+}
+
+#effectErreur h3 { 
+  margin: 0; 
+  padding: 0.4em; 
+  text-align: 
+  center; 
+  color: red;
 }

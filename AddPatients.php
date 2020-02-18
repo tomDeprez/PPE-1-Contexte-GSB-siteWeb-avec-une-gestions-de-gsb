@@ -1,78 +1,67 @@
 <?php
 require("ConnexionBDD.php");
+session_start();
 
-if (isset($_POST['idUtilisateur'])) {
-    $idUtilisateur = $_POST['idUtilisateur'];
-}
-else {
+if (isset($_SESSION['idUtilisateur'])) {
+    $idUtilisateur = $_SESSION['idUtilisateur'];
+} else {
     $idUtilisateur = "";
 }
 
 if (isset($_POST['Nom'])) {
     $Nom = $_POST['Nom'];
-}
-else {
+} else {
     $Nom = "";
 }
 
 if (isset($_POST['Prenom'])) {
     $Prenom = $_POST['Prenom'];
-}
-else {
+} else {
     $Prenom = "";
 }
 if (isset($_POST['Age'])) {
     $Age = $_POST['Age'];
-}
-else {
+} else {
     $Age = "";
 }
 if (isset($_POST['Sexe'])) {
     $Sexe = $_POST['Sexe'];
-}
-else {
+} else {
     $Sexe = "";
 }
 if (isset($_POST['Poids'])) {
     $Poids = $_POST['Poids'];
-}
-else {
+} else {
     $Poids = "";
 }
 if (isset($_POST['Taille'])) {
     $Taille = $_POST['Taille'];
-}
-else {
+} else {
     $Taille = "";
 }
 if (isset($_POST['Fat'])) {
     $Fat = $_POST['Fat'];
-}
-else {
+} else {
     $Fat = "";
 }
 if (isset($_POST['Temperature'])) {
     $Temperature = $_POST['Temperature'];
-}
-else {
+} else {
     $Temperature = "";
 }
 if (isset($_POST['Calories'])) {
     $Calories = $_POST['Calories'];
-}
-else {
+} else {
     $Calories = "";
 }
 if (isset($_POST['Coeur'])) {
     $Coeur = $_POST['Coeur'];
-}
-else {
+} else {
     $Coeur = "";
 }
 if (isset($_POST['Sommeil'])) {
     $Sommeil = $_POST['Sommeil'];
-}
-else {
+} else {
     $Sommeil = "";
 }
 
@@ -101,43 +90,69 @@ $Calories = htmlspecialchars($Calories);
 $Coeur = htmlspecialchars($Coeur);
 $Sommeil = htmlspecialchars($Sommeil);
 
-if ($Nom != "" && $Prenom != "" && $idUtilisateur != ""){
-    $stmt = $dbh->prepare("SELECT * FROM patient WHERE nom = :nom and prenom = :prenom");
-    $stmt->bindParam(':nom', $Nomr);
-    $stmt->bindParam(':prenom', $emailr);
-    $Nomr = $Nom;
-    $Prenomr = $Prenom;
-    
-    if ($stmt->execute()) {
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($result['prenom'] != ""){
-            echo "*<center><h1>Compte trouvé ! \n Bienvenue ".$result['prenom']." !</h1></center>";
-            require("redirectionSession.php");
-        }
-        else {
-            echo "<div><center><h1>Compte introuvable nous sommes désolés !!</h1>";
-            echo '<form action="inscription.php"><button class=\"button\">Créer un compte</button></center></div></form>';
-        }
-    }
-}
-else if ($Nom == "" || $Prenom = ""){
+if ($Nom == "" || $Prenom == "") {
     echo "<div class='toggler'>
-    <div id='effect' class='ui-widget-content ui-corner-all' >
+    <div id='effectErreur' class='ui-widget-content ui-corner-all' >
       <h3 class='ui-widget-header ui-corner-all'>Erreur</h3>
       <p>
         Une erreur est arrivé.
         Le nom et le prénom est obligatoire pour ajouter un patient.
-        ".$Nom." - ".$Prenom."
       </p>
     </div>
     </div>";
+} else {
+    $stmt = $dbh->prepare("SELECT * FROM patient WHERE nom = :nom and prenom = :prenom");
+    $stmt->bindParam(':nom', $Nom);
+    $stmt->bindParam(':prenom', $Prenom);
+    $Nom = $Nom;
+    $Prenom = $Prenom;
+    if ($stmt->execute()) {
+        if ($data = $stmt->fetch()) {
+            echo "<div class='toggler'>
+        <div id='effectErreur' class='ui-widget-content ui-corner-all' >
+          <h3 class='ui-widget-header ui-corner-all'>Erreur</h3>
+          <p>
+            Une erreur est arrivé.
+            Le nom et le prénom sont déjà utilisé.
+            " . $Nom . " / " . $Prenom . "
+          </p>
+        </div>
+        </div>";
+        } else {
+            $stmt = $dbh->prepare("INSERT INTO `patient`(`idUtilisateur`, `nom`, `prenom`, `age`, `sexe`, `poids`, `taille`, `fat`, `temperature`, `calories`, `coeur`, `sommeil`) VALUES (:idUtilisateur, :Nom, :Prenom, :Age, :Sexe, :Poids, :Taille, :Fat, :Temperature, :Calories, :Coeur, :Sommeil)");
+            $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+            $stmt->bindParam(':Nom', $Nom);
+            $stmt->bindParam(':Prenom', $Prenom);
+            $stmt->bindParam(':Age', $Age);
+            $stmt->bindParam(':Sexe', $Sexe);
+            $stmt->bindParam(':Poids', $Poids);
+            $stmt->bindParam(':Taille', $Taille);
+            $stmt->bindParam(':Fat', $Fat);
+            $stmt->bindParam(':Temperature', $Temperature);
+            $stmt->bindParam(':Calories', $Calories);
+            $stmt->bindParam(':Coeur', $Coeur);
+            $stmt->bindParam(':Sommeil', $Sommeil);
+            $idUtilisateur = $idUtilisateur;
+            $Nom = $Nom;
+            $Prenom = $Prenom;
+            $Age = $Age;
+            $Sexe = $Sexe;
+            $Poids = $Poids;
+            $Taille = $Taille;
+            $Fat = $Fat;
+            $Temperature = $Temperature;
+            $Calories = $Calories;
+            $Coeur = $Coeur;
+            $Sommeil = $Sommeil;
+            $stmt->execute();
+            echo "<div class='toggler'>
+            <div id='effect' class='ui-widget-content ui-corner-all' >
+              <h3 class='ui-widget-header ui-corner-all'>Succes</h3>
+              <p>
+                Le compte " . $Nom . " à bien été ajouté
+              </p>
+            </div>
+            </div>";
+        }
+    }
 }
-else {
-    $stmt = $dbh->prepare("SELECT * FROM patient WHERE nom = :mdp and prenom = :email");
-    $stmt->bindParam(':mdp', $mdp1r);
-    $stmt->bindParam(':email', $emailr);
-    $emailr = $email;
-    $mdp1r = $mdp;
-    
-}
-
