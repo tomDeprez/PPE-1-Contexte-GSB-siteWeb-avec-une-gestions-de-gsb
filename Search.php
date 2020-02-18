@@ -24,7 +24,7 @@ foreach ($result as $key => $value) {
     // var_dump($value);
     $get .= "<div class='activity'>
     <div class='image-container'><img src='https://placeimg.com/40/40/face' /></div>
-    <div class='text'><span onclick='alert('TEST');' class='name'>".$result[$key]['nom']." </span>added a new appointment to your calendar.<span class='time-ago'>2 hours ago</span></div>
+    <div class='text' onclick='alert(\"".$result[$key]['nom']."\");'><span class='name'>".$result[$key]['nom']." </span>added a new appointment to your calendar.<span class='time-ago'>2 hours ago</span></div>
     </div>";
 }
 echo $get;
