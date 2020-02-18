@@ -184,6 +184,22 @@
 </body>
 
 <script>
+    $(document).ready(function() {
+        $.ajax({
+            url: 'Search.php', // Le nom du fichier indiqué dans le formulaire
+            type: "POST", // La méthode indiquée dans le formulaire (get ou post)
+            data: "search=",
+            dataType: 'html',
+            success: function(response) { // Je récupère la réponse du fichier PHP
+                if (response == "") {
+                    $('#activity-list').html("<h3>Recent Activity</h3>" + "Aucun compte trouvé");
+                } else {
+                    $('#activity-list').html("<h3>Recent Activity</h3>" + response);
+                }
+            }
+        });
+    });
+
     function cleRelachee(event) {
         event.preventDefault();
         var search = document.getElementById("Search").value;
@@ -222,6 +238,7 @@
         event.preventDefault();
         var myForm = document.getElementById('Myform');
         var formData = new FormData(myForm);
+        
         //alert(form.serialize());
         $.ajax({
             url: 'AddPatients.php', // Le nom du fichier indiqué dans le formulaire
@@ -234,7 +251,7 @@
             success: function(response) { // Je récupère la réponse du fichier PHP
                 $('#products').html(response);
                 // setTimeout($('#products').html(""), 10000);
-                sleep(5000).then(() => {
+                sleep(4000).then(() => {
                     $('#products').html("");
                 });
             }
