@@ -100,7 +100,7 @@ body {
 }
 .summary-column .profile-img .name {
   position: absolute;
-  bottom: 25px;
+  bottom: 250px;
   left: 1em;
   color: white;
   font-size: 1.5em;
@@ -325,7 +325,7 @@ body {
   color: #58676c;
   font-size: 2em;
   line-height: 2em;
-  width: 225px;
+  width: 255px;
   margin: auto;
   position: relative;
   font-weight: 300;

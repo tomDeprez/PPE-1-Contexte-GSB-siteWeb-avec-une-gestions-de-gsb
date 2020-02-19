@@ -96,7 +96,7 @@ if ($Nom == "" || $Prenom == "") {
       <h3 class='ui-widget-header ui-corner-all'>Erreur</h3>
       <p>
         Une erreur est arrivé.
-        Le nom et le prénom est obligatoire pour ajouter un patient.
+        Le nom et le prénom sont obligatoire pour ajouter un patient.
       </p>
     </div>
     </div>";

@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
+<?php require("checkIfSessionTrue.php"); ?>
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>RESPONSIVE MATERIAL DESIGN CONTACT FORM </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
@@ -238,7 +241,7 @@
         event.preventDefault();
         var myForm = document.getElementById('Myform');
         var formData = new FormData(myForm);
-        
+
         //alert(form.serialize());
         $.ajax({
             url: 'AddPatients.php', // Le nom du fichier indiqué dans le formulaire
@@ -251,16 +254,12 @@
             success: function(response) { // Je récupère la réponse du fichier PHP
                 $('#products').html(response);
                 // setTimeout($('#products').html(""), 10000);
-                sleep(4000).then(() => {
+                setTimeout(function() {
                     $('#products').html("");
-                });
+                }, 5000)
             }
         });
     });
-
-    function sleep(time) {
-        return new Promise((resolve) => setTimeout(resolve, time));
-    }
 
     $(function() {
         // run the currently selected effect

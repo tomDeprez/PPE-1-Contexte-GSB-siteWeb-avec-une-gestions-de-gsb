@@ -26,6 +26,8 @@ if ($email != "" && $mdp != "") {
             echo "*<center><h1>Compte trouvé ! \n Bienvenue " . $result['prenom'] . " !</h1></center>";
             session_start();
             $_SESSION['idUtilisateur'] = $result['id'];
+            $_SESSION['utilisateurNom'] = $result['nom'];
+            $_SESSION['utilisateurPrenom'] = $result['prenom'];
             require("redirectionSession.php");
         } else {
             echo "<div><center><h1>Compte introuvable nous sommes désolés !!</h1>";
