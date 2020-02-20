@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Dashboard</title>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <link rel='stylesheet' href='css/cssRoboto.css'>
   <link rel="stylesheet" href="css/styleSession.css">
   <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
@@ -33,21 +35,30 @@
           $('#page').html(response);
         }
       });
-      setTimeout(function() {
-        $.ajax({
-          url: 'Search.php', // Le nom du fichier indiqué dans le formulaire
-          type: "POST", // La méthode indiquée dans le formulaire (get ou post)
-          data: "search=",
-          dataType: 'html',
-          success: function(response) { // Je récupère la réponse du fichier PHP
-            if (response == "") {
-              $('#activity-list').html("<h3>Recent Activity</h3>" + "Aucun compte trouvé");
-            } else {
-              $('#activity-list').html("<h3>Recent Activity</h3>" + response);
+      $.ajax({
+            url: 'Loader.php', // Le nom du fichier indiqué dans le formulaire
+            type: "POST", // La méthode indiquée dans le formulaire (get ou post)
+            data: "search=",
+            dataType: 'html',
+            success: function(response) { // Je récupère la réponse du fichier PHP
+                $('#activity-list').html("<h3>Patient</h3>" + response);
             }
-          }
         });
-      }, 500)
+        setTimeout(function() {
+            $.ajax({
+                url: 'Search.php', // Le nom du fichier indiqué dans le formulaire
+                type: "POST", // La méthode indiquée dans le formulaire (get ou post)
+                data: "search=",
+                dataType: 'html',
+                success: function(response) { // Je récupère la réponse du fichier PHP
+                    if (response == "") {
+                        $('#activity-list').html("<h3>Patient</h3>" + "Aucun compte trouvé");
+                    } else {
+                        $('#activity-list').html("<h3>Patient</h3>" + response);
+                    }
+                }
+            });
+        }, 1000)
     });
 
     function getUtilisateurById(id) {
@@ -68,9 +79,9 @@
           dataType: 'html',
           success: function(response) { // Je récupère la réponse du fichier PHP
             if (response == "") {
-              $('#activity-list').html("<h3>Recent Activity</h3>" + "Aucun compte trouvé");
+              $('#activity-list').html("<h3>Patient</h3>" + "Aucun compte trouvé");
             } else {
-              $('#activity-list').html("<h3>Recent Activity</h3>" + response);
+              $('#activity-list').html("<h3>Patient</h3>" + response);
             }
           }
         });
@@ -86,7 +97,7 @@
         data: "search=",
         dataType: 'html',
         success: function(response) { // Je récupère la réponse du fichier PHP
-          $('#activity-list').html("<h3>Recent Activity</h3>" + response);
+          $('#activity-list').html("<h3>Patient</h3>" + response);
         }
       });
       $.ajax({
@@ -96,9 +107,9 @@
         dataType: 'html',
         success: function(response) { // Je récupère la réponse du fichier PHP
           if (response == "") {
-            $('#activity-list').html("<h3>Recent Activity</h3>" + "Aucun compte trouvé");
+            $('#activity-list').html("<h3>Patient</h3>" + "Aucun compte trouvé");
           } else {
-            $('#activity-list').html("<h3>Recent Activity</h3>" + response);
+            $('#activity-list').html("<h3>Patient</h3>" + response);
           }
         }
       });
