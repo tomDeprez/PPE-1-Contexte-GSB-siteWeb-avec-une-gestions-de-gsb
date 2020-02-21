@@ -55,7 +55,8 @@ if ($result = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
 
 
 
-
+$Age = date('j-m-y');  
+$Age = "2018-10-2";  
 
 
 $retourBack = "<div class='menu-column'>
@@ -107,7 +108,7 @@ $retourBack = "<div class='menu-column'>
         <div class='col-sm-12'>
             <div class='input-block focus'>
                 <label for='' style='top: 10px; font-size: 14px;'>Age</label>
-                <input type='text' name='Age' value='" . $Age . "' class='form-control'>
+                <input type='date' name='Age' value='" . $Age . "' class='form-control'>
             </div>
         </div>
         <div class='col-sm-12'>
@@ -174,39 +175,7 @@ $retourBack = "<div class='menu-column'>
     <input type='text' id='Search' onKeyUp='cleRelachee(event)' placeholder='Search' />
 </div>
 <div class='activity-list' id='activity-list' name='activity-list'>
-    <h3>Recent Activity</h3>
-    <div class='activity'>
-        <div class='image-container'></div>
-        <div class='text'><span class='name'>Peter Smith </span>added a new appointment to your calendar.<span class='time-ago'>2 hours ago</span></div>
-    </div>
-    <div class='activity'>
-        <div class='image-container'></div>
-        <div class='text'><span class='name'>Katarina Rychia </span>commented on your Results 09<span class='time-ago'>2 hours ago</span></div>
-    </div>
-    <div class='activity'>
-        <div class='image-container'></div>
-        <div class='text'><span class='name'>Tereza Dvorak </span>added two attachments to Results 238.<span class='time-ago'>6 days ago</span></div>
-    </div>
-    <div class='activity'>
-        <div class='image-container'></div>
-        <div class='text'><span class='name'>Peter Smith </span>added a new appointment to your calendar.<span class='time-ago'>7 days ago</span></div>
-    </div>
-    <div class='your-doctors'>
-        <h3>Your Doctors</h3>
-        <div class='doctor'>
-            <div class='image-container'></div>
-            <div class='text'><span class='name-large'>Peter Smith</span><span class='title'>Dentist</span></div>
-        </div>
-        <div class='doctor'>
-            <div class='image-container'></div>
-            <div class='text'><span class='name-large'>Katarina Rychia </span><span class='title'>Dentist</span></div>
-        </div>
-        <div class='doctor'>
-            <div class='image-container'></div>
-            <div class='text'><span class='name-large'>Tereza Dvorak </span><span class='title'>Physician</span></div>
-        </div>
-        <button class='find-doctor'>Find new doctor</button>
-    </div>
+
 </div>
 </div>";
 
