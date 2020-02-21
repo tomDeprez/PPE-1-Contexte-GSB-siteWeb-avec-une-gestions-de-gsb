@@ -72,7 +72,7 @@ $retourBack = "<div class='menu-column'>
 <ul class='nav'>
   <li class='pulse' id='pulse'></li>
   <li class='clipboard' onclick='window.location.href = \"sessionAdd.php\";' id='clipboard'></li>
-  <li class='settings' id='settings'></li>
+  <li class='settings' onclick='window.location.href = \"exit.php\";' id='settings'></li>
 </ul>
 <div class='profile'></div>
 </div>
@@ -147,7 +147,7 @@ $retourBack = "<div class='menu-column'>
   </div>
   <div class='sleep-graph'>
     <div class='sleep-graph-container'>
-      <h2> Sleep Analytics</h2>
+      <h2> BMI Analytics</h2>
       <div class='sleep-select-wrapper'>
         <select onchange='functionActif(this.value);'>";
         if ($actif == '0') {

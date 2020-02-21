@@ -62,6 +62,7 @@ $retourBack = "<div class='menu-column'>
 <ul class='nav'>
     <li class='pulse' onclick='window.location.href = \"sesionHome.php\";' id='pulse'></li>
     <li class='clipboard' id='clipboard'></li>
+    <li class='settings' onclick='window.location.href = \"exit.php\";' id='settings'></li>
 </ul>
 <div class='profile'></div>
 </div>

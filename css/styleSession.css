@@ -76,6 +76,8 @@ body {
 }
 .menu-column .settings {
   background-image: url("../img/exit.png");
+  width: 50%;
+  margin-right: -50px;
 }
 
 .float-none {
