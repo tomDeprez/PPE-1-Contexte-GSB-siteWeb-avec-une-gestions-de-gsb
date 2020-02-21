@@ -55,8 +55,7 @@ if ($result = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
 
 
 
-$Age = date('j-m-y');  
-$Age = "2018-10-2";  
+
 
 
 $retourBack = "<div class='menu-column'>
@@ -72,7 +71,7 @@ $retourBack = "<div class='menu-column'>
 </div>
 <div class='statistics'>
     <h2>summary</h2>
-    <div class='age'><span class='title title-age'>22</span></div>
+    <div class='age'><span class='title title-age'>" . $Age . "</span></div>
     <div class='weight'><span class='title title-weight'>" . $Poids . " kg</span></div>
     <div class='float-none'></div>
     <div class='height'>
@@ -108,7 +107,7 @@ $retourBack = "<div class='menu-column'>
         <div class='col-sm-12'>
             <div class='input-block focus'>
                 <label for='' style='top: 10px; font-size: 14px;'>Age</label>
-                <input type='date' name='Age' value='" . $Age . "' class='form-control'>
+                <input type='text' name='Age' value='" . $Age . "' class='form-control'>
             </div>
         </div>
         <div class='col-sm-12'>

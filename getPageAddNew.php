@@ -62,9 +62,9 @@ $retourBack = "<div class='menu-column'>
             </div>
         </div>
         <div class='col-sm-12'>
-            <div class='input-block focus'>
-                <label for='' style='top: 10px; font-size: 14px;'>Age</label>
-                <input type='date' name='Age' class='form-control'>
+            <div class='input-block'>
+                <label for=''>Age</label>
+                <input type='text' name='Age' class='form-control'>
             </div>
         </div>
         <div class='col-sm-12'>

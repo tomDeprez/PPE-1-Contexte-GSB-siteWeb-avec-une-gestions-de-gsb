@@ -37,6 +37,7 @@
 </body>
 
 <script>
+    var recherche = "";
     $(document).ready(function() {
         $.ajax({
             url: 'Search.php', // Le nom du fichier indiqué dans le formulaire
@@ -88,6 +89,7 @@
     function cleRelachee(event) {
         event.preventDefault();
         var search = document.getElementById("Search").value;
+        recherche = search;
         $.ajax({
             url: 'Loader.php', // Le nom du fichier indiqué dans le formulaire
             type: "POST", // La méthode indiquée dans le formulaire (get ou post)
@@ -128,7 +130,7 @@
             $.ajax({
                 url: 'Search.php', // Le nom du fichier indiqué dans le formulaire
                 type: "POST", // La méthode indiquée dans le formulaire (get ou post)
-                data: "search=",
+                data: "search=" + recherche,
                 dataType: 'html',
                 success: function(response) { // Je récupère la réponse du fichier PHP
                     if (response == "") {
@@ -136,6 +138,7 @@
                     } else {
                         $('#activity-list').html("<h3>Patient</h3>" + response);
                     }
+                    document.getElementById("Search").value = recherche;
                 }
             });
         }, 500)

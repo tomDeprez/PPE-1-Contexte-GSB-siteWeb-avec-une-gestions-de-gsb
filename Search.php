@@ -12,7 +12,7 @@ $retour = "<div class='activity'>
 <div class='text'><span class='name'>Peter Smith </span>added a new appointment to your calendar.<span class='time-ago'>2 hours ago</span></div>
 </div>";
 
-$stmt = $dbh->prepare("SELECT DISTINCT nom,id FROM patient WHERE nom LIKE :nom OR prenom LIKE :prenom ORDER BY nom LIMIT 10");
+$stmt = $dbh->prepare("SELECT DISTINCT nom,id,prenom,utiliser FROM patient WHERE nom LIKE :nom OR prenom LIKE :prenom ORDER BY nom LIMIT 9");
 $stmt->bindParam(':nom', $nom);
 $stmt->bindParam(':prenom', $prenom);
 $nom = $search;
@@ -22,9 +22,17 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $key => $value) {
     // echo $result['nom'][0];
     // var_dump($value);
-    $get .= "<div class='activity'>
-    <div class='image-container'><img src='https://placeimg.com/40/40/face' /></div>
-    <div class='text' onclick='getUtilisateurById(\"".$value['id']."\");'><span class='name'>".$result[$key]['nom']." </span>added a new appointment to your calendar.<span class='time-ago'>2 hours ago</span></div>
-    </div>";
+    if ($value['utiliser'] == 0) {
+        $get .= "<div class='activity'>
+        <div class='image-container'><img src='./img/valider.png' /></div>
+        <div class='text' onclick='getUtilisateurById(\"".$value['id']."\");'><span class='name'>".$result[$key]['nom']." ".$result[$key]['prenom']." </span>added a new appointment to your calendar.<span class='time-ago'>2 hours ago</span></div>
+        </div>";
+    }
+    if ($value['utiliser'] == 1) {
+        $get .= "<div class='activity'>
+        <div class='image-container'><img src='./img/non-validé.png' /></div>
+        <div class='text' onclick='getUtilisateurById(\"".$value['id']."\");'><span class='name'>".$result[$key]['nom']." ".$result[$key]['prenom']." </span>added a new appointment to your calendar.<span class='time-ago'>2 hours ago</span></div>
+        </div>";
+    }
 }
 echo $get;

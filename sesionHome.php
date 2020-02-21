@@ -25,6 +25,7 @@
   <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyA5wVTk5SQ3alGnIqPchU9CmU7v__ypM6Q'></script> -->
   <!-- <script src="js/script.js"></script> -->
   <script>
+    var recherche = "";
     $(document).ready(function() {
       $.ajax({
         url: 'getPageUtilisateur.php', // Le nom du fichier indiqué dans le formulaire
@@ -36,39 +37,12 @@
         }
       });
       $.ajax({
-            url: 'Loader.php', // Le nom du fichier indiqué dans le formulaire
-            type: "POST", // La méthode indiquée dans le formulaire (get ou post)
-            data: "search=",
-            dataType: 'html',
-            success: function(response) { // Je récupère la réponse du fichier PHP
-                $('#activity-list').html("<h3>Patient</h3>" + response);
-            }
-        });
-        setTimeout(function() {
-            $.ajax({
-                url: 'Search.php', // Le nom du fichier indiqué dans le formulaire
-                type: "POST", // La méthode indiquée dans le formulaire (get ou post)
-                data: "search=",
-                dataType: 'html',
-                success: function(response) { // Je récupère la réponse du fichier PHP
-                    if (response == "") {
-                        $('#activity-list').html("<h3>Patient</h3>" + "Aucun compte trouvé");
-                    } else {
-                        $('#activity-list').html("<h3>Patient</h3>" + response);
-                    }
-                }
-            });
-        }, 1000)
-    });
-
-    function getUtilisateurById(id) {
-      $.ajax({
-        url: 'getPageUtilisateur.php', // Le nom du fichier indiqué dans le formulaire
+        url: 'Loader.php', // Le nom du fichier indiqué dans le formulaire
         type: "POST", // La méthode indiquée dans le formulaire (get ou post)
-        data: "id=" + id,
+        data: "search=",
         dataType: 'html',
         success: function(response) { // Je récupère la réponse du fichier PHP
-          $('#page').html(response);
+          $('#activity-list').html("<h3>Patient</h3>" + response);
         }
       });
       setTimeout(function() {
@@ -85,12 +59,68 @@
             }
           }
         });
+      }, 1000)
+    });
+
+    function functionActif(value) {
+      $.ajax({
+        url: 'setActif.php', // Le nom du fichier indiqué dans le formulaire
+        type: "POST", // La méthode indiquée dans le formulaire (get ou post)
+        data: "actif=" + value,
+        dataType: 'html',
+        success: function(response) { // Je récupère la réponse du fichier PHP
+        }
+      });
+      setTimeout(function() {
+        $.ajax({
+          url: 'Search.php', // Le nom du fichier indiqué dans le formulaire
+          type: "POST", // La méthode indiquée dans le formulaire (get ou post)
+          data: "search=" + recherche,
+          dataType: 'html',
+          success: function(response) { // Je récupère la réponse du fichier PHP
+            if (response == "") {
+              $('#activity-list').html("<h3>Patient</h3>" + "Aucun compte trouvé");
+            } else {
+              $('#activity-list').html("<h3>Patient</h3>" + response);
+            }
+            document.getElementById("Search").value = recherche;
+          }
+        });
+      }, 1000)
+    }
+
+    function getUtilisateurById(id) {
+      $.ajax({
+        url: 'getPageUtilisateur.php', // Le nom du fichier indiqué dans le formulaire
+        type: "POST", // La méthode indiquée dans le formulaire (get ou post)
+        data: "id=" + id,
+        dataType: 'html',
+        success: function(response) { // Je récupère la réponse du fichier PHP
+          $('#page').html(response);
+        }
+      });
+      setTimeout(function() {
+        $.ajax({
+          url: 'Search.php', // Le nom du fichier indiqué dans le formulaire
+          type: "POST", // La méthode indiquée dans le formulaire (get ou post)
+          data: "search=" + recherche,
+          dataType: 'html',
+          success: function(response) { // Je récupère la réponse du fichier PHP
+            if (response == "") {
+              $('#activity-list').html("<h3>Patient</h3>" + "Aucun compte trouvé");
+            } else {
+              $('#activity-list').html("<h3>Patient</h3>" + response);
+            }
+            document.getElementById("Search").value = recherche;
+          }
+        });
       }, 500)
     }
 
     function cleRelachee(event) {
       event.preventDefault();
       var search = document.getElementById("Search").value;
+      recherche = search;
       $.ajax({
         url: 'Loader.php', // Le nom du fichier indiqué dans le formulaire
         type: "POST", // La méthode indiquée dans le formulaire (get ou post)
@@ -111,6 +141,7 @@
           } else {
             $('#activity-list').html("<h3>Patient</h3>" + response);
           }
+          document.getElementById("Search").value = recherche;
         }
       });
     }

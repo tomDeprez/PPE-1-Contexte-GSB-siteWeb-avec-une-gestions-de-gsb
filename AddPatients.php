@@ -131,7 +131,7 @@ if ($Nom == "" || $Prenom == "") {
         </div>
         </div>";
         } else {
-            $stmt = $dbh->prepare("INSERT INTO `patient`(`idUtilisateur`, `nom`, `prenom`, `age`, `sexe`, `poids`, `taille`, `fat`, `temperature`, `calories`, `coeur`, `sommeil`) VALUES (:idUtilisateur, :Nom, :Prenom, :Age, :Sexe, :Poids, :Taille, :Fat, :Temperature, :Calories, :Coeur, :Sommeil)");
+            $stmt = $dbh->prepare("INSERT INTO `patient`(`idUtilisateur`, `nom`, `prenom`, `age`, `sexe`, `poids`, `taille`, `fat`, `temperature`, `calories`, `coeur`, `sommeil`, `utiliser`) VALUES (:idUtilisateur, :Nom, :Prenom, :Age, :Sexe, :Poids, :Taille, :Fat, :Temperature, :Calories, :Coeur, :Sommeil, 0)");
             $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
             $stmt->bindParam(':Nom', $Nom);
             $stmt->bindParam(':Prenom', $Prenom);

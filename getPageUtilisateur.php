@@ -9,6 +9,9 @@ if (isset($_POST['id'])) {
 }
 $utilisateurName;
 
+$_SESSION['id'] = $utilisateurId;
+
+
 $Nom = "";
 $Prenom = "";
 $Age = "";
@@ -21,6 +24,7 @@ $Calories = "";
 $Coeur = "";
 $Sommeil = "";
 $Bmi = "";
+$actif = 0;
 
 
 
@@ -53,11 +57,16 @@ foreach ($result as $key => $value) {
     $Calories = $value['calories'];
     $Coeur = $value['coeur'];
     $Sommeil = $value['sommeil'];
+    $actif = $value['utiliser'];
     $Bmi = round($Poids / ($Taille*2), 2);
 }
 
+$night = 24 - intval($Sommeil);
+$ratrapage = 8 - intval($Sommeil);
 
-
+if ($ratrapage < 0) {
+  $ratrapage = 0;
+}
 
 $retourBack = "<div class='menu-column'>
 <ul class='nav'>
@@ -125,20 +134,30 @@ $retourBack = "<div class='menu-column'>
     <div class='collective'><span class='hours'>" . $Sommeil . "</span>
       <p>Total sleep time</p>
     </div>
-    <div class='split first'>6h 12m
-      <p>Deep</p>
+    <div class='split first'>" . $Sommeil . "h
+      <p>Nuit</p>
     </div>
-    <div class='split'>2h 13m
-      <p>Light</p>
+    <div class='split'>" . $night . "h
+      <p>Jour</p>
     </div>
+    <div class='split'>" . $ratrapage . "h
+    <p>Ratraper</p>
+  </div>
   </div>
   <div class='sleep-graph'>
     <div class='sleep-graph-container'>
       <h2> Sleep Analytics</h2>
       <div class='sleep-select-wrapper'>
-        <select>
-          <option value='today'>Today</option>
-        </select>
+        <select onchange='functionActif(this.value);'>";
+        if ($actif == '0') {
+          $retourBack .= "<option value='0' selected>Actif</option>
+          <option value='1'>Inactif</option>";
+        }
+        else {
+          $retourBack .= "<option value='0'>Actif</option>
+          <option value='1' selected>Inactif</option>";
+        }
+        $retourBack .= "</select>
       </div>
       <div class='chart-container'>
         <canvas id='sleepChart'></canvas>
@@ -146,35 +165,7 @@ $retourBack = "<div class='menu-column'>
     </div>
   </div>
 </div>
-<div class='float-none'></div>
-<div class='split-container'>
-  <div class='split bottom'>
-    <h2>Appointments</h2>
-    <div class='appointments'>
-      <div class='calendar-container'>
-        <div class='calendar'>25<span class='date'>th</span><span class='month'>Jul</span></div>
-        <div class='content'>
-          <table class='appointment-table'>
-            <tr>
-              <td id='time'>13:00</td>
-            </tr>
-            <tr>
-              <td id='title'>Dentist</td>
-            </tr>
-            <tr>
-              <td id='name'>Jozef Novotny</td>
-            </tr>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class='split bottom'>
-    <div id='map'></div>
-    <div class='map-overlay'>
-      <h2>Steps today</h2><span class='steps'>4578</span><span class='distance'>1.7 km</span>
-    </div>
-  </div>
+
 </div>
 </div>
 <div class='search-column'>
