@@ -1,9 +1,22 @@
 <?php
 require("ConnexionBDD.php");
 
+$email = "";
+$mdp = "";
 
-$email = $_POST['email'];
-$mdp = $_POST['mdp'];
+if (isset($_POST['email'])) {
+    $email = $_POST['email'];
+}else if (isset($_GET['email'])){
+    $email = $_GET['email'];
+}
+
+if (isset($_POST['mdp'])) {
+    $mdp = $_POST['mdp'];
+}else if (isset($_GET['mdp'])){
+    $mdp = $_GET['mdp'];
+}
+
+
 
 $email = trim($email);
 $mdp = trim($mdp);
@@ -28,7 +41,12 @@ if ($email != "" && $mdp != "") {
             $_SESSION['idUtilisateur'] = $result['id'];
             $_SESSION['utilisateurNom'] = $result['nom'];
             $_SESSION['utilisateurPrenom'] = $result['prenom'];
-            require("redirectionSession.php");
+            
+            if (isset($_GET['email'])){
+                if (isset($_GET['mdp'])){
+                    header('Location: sesionHome.php');
+                }                             
+            }
         } else {
             echo "<div><center><h1>Compte introuvable nous sommes désolés !!</h1>";
             echo '<form action="inscription.php"><button class=\"button\">Créer un compte</button></center></div></form>';
